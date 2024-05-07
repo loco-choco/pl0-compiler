@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Created with JFLAP 7.1.--><structure>
+	<type>fa</type>
+	<automaton>
+		<!--The list of states.-->
+		<state id="0" name="q0">
+			<x>348.0</x>
+			<y>317.0</y>
+			<initial/>
+		</state>
+		<state id="1" name="q1">
+			<x>551.0</x>
+			<y>234.0</y>
+		</state>
+		<state id="2" name="q2">
+			<x>688.0</x>
+			<y>232.0</y>
+			<final/>
+		</state>
+		<state id="3" name="q3">
+			<x>222.0</x>
+			<y>518.0</y>
+		</state>
+		<state id="4" name="q4">
+			<x>455.0</x>
+			<y>153.0</y>
+		</state>
+		<state id="5" name="q5">
+			<x>594.0</x>
+			<y>95.0</y>
+			<final/>
+		</state>
+		<state id="6" name="q6">
+			<x>550.0</x>
+			<y>325.0</y>
+		</state>
+		<state id="7" name="q7">
+			<x>714.0</x>
+			<y>307.0</y>
+			<final/>
+		</state>
+		<state id="8" name="q8">
+			<x>704.0</x>
+			<y>365.0</y>
+			<final/>
+		</state>
+		<state id="9" name="q9">
+			<x>706.0</x>
+			<y>431.0</y>
+			<final/>
+		</state>
+		<state id="10" name="q10">
+			<x>535.0</x>
+			<y>419.0</y>
+		</state>
+		<state id="11" name="q11">
+			<x>682.0</x>
+			<y>502.0</y>
+			<final/>
+		</state>
+		<state id="12" name="q12">
+			<x>639.0</x>
+			<y>560.0</y>
+			<final/>
+		</state>
+		<state id="13" name="q13">
+			<x>454.0</x>
+			<y>473.0</y>
+		</state>
+		<state id="14" name="q14">
+			<x>561.0</x>
+			<y>602.0</y>
+			<final/>
+		</state>
+		<state id="15" name="q15">
+			<x>345.0</x>
+			<y>565.0</y>
+			<final/>
+		</state>
+		<state id="16" name="q16">
+			<x>236.0</x>
+			<y>189.0</y>
+			<final/>
+		</state>
+		<state id="17" name="q17">
+			<x>453.0</x>
+			<y>624.0</y>
+			<final/>
+		</state>
+		<state id="18" name="q18">
+			<x>144.0</x>
+			<y>415.0</y>
+			<final/>
+		</state>
+		<!--The list of transitions.-->
+		<transition>
+			<from>3</from>
+			<to>3</to>
+			<controlx>217</controlx>
+			<controly>414</controly>
+			<read>other</read>
+		</transition>
+		<transition>
+			<from>6</from>
+			<to>8</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>4</to>
+			<read>0-9</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>2</to>
+			<read>other</read>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>18</to>
+			<read>EOF</read>
+		</transition>
+		<transition>
+			<from>4</from>
+			<to>5</to>
+			<read>other</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>10</to>
+			<read>&gt;</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>6</to>
+			<read>&lt;</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>1</to>
+			<read>A-Z</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>1</to>
+			<read>a-z</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>0</to>
+			<read>\n</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>0</to>
+			<read>\r</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>16</to>
+			<read>other</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>A-Z</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>0</to>
+			<read>\t</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>a-z</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>1</to>
+			<read>0-9</read>
+		</transition>
+		<transition>
+			<from>4</from>
+			<to>4</to>
+			<read>0-9</read>
+		</transition>
+		<transition>
+			<from>13</from>
+			<to>14</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>6</from>
+			<to>7</to>
+			<read>&gt;</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>0</to>
+			<read>Space</read>
+		</transition>
+		<transition>
+			<from>6</from>
+			<to>9</to>
+			<read>other</read>
+		</transition>
+		<transition>
+			<from>10</from>
+			<to>12</to>
+			<read>other</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>15</to>
+			<read>. , ; = + - * / ( )</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>13</to>
+			<read>:</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>3</to>
+			<controlx>292</controlx>
+			<controly>425</controly>
+			<read>{</read>
+		</transition>
+		<transition>
+			<from>13</from>
+			<to>17</to>
+			<read>other</read>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>0</to>
+			<controlx>261</controlx>
+			<controly>409</controly>
+			<read>}</read>
+		</transition>
+		<transition>
+			<from>10</from>
+			<to>11</to>
+			<read>=</read>
+		</transition>
+		<note>
+			<text>if search_reservedTable(string):
+           return (string, reserved/Token)
+else:
+          if strlen(string) &lt;= MAX:
+                       return(string, ident)
+          else:
+                       return_error("Indentifier too long")
+backtrack()</text>
+			<x>719.0</x>
+			<y>136.0</y>
+		</note>
+		<note>
+			<text>if strlen(string) &lt;= MAX:
+            return(string, number)
+else:
+            return_error("Number too long")
+backtrack()</text>
+			<x>631.0</x>
+			<y>36.0</y>
+		</note>
+		<note>
+			<text>return(&lt;&gt;, diff)</text>
+			<x>755.0</x>
+			<y>309.0</y>
+		</note>
+		<note>
+			<text>return(&lt;=, less_eq)</text>
+			<x>730.0</x>
+			<y>371.0</y>
+		</note>
+		<note>
+			<text>return(&lt;, less)
+backtrack()</text>
+			<x>731.0</x>
+			<y>445.0</y>
+		</note>
+		<note>
+			<text>return(&gt;=, bigg_eq)</text>
+			<x>688.0</x>
+			<y>530.0</y>
+		</note>
+		<note>
+			<text>return(&gt;, bigger)
+backtrack()</text>
+			<x>628.0</x>
+			<y>588.0</y>
+		</note>
+		<note>
+			<text>return(:= , assign)</text>
+			<x>515.0</x>
+			<y>634.0</y>
+		</note>
+		<note>
+			<text>return(symbol, search_reservedTable(symbol))</text>
+			<x>108.0</x>
+			<y>593.0</y>
+		</note>
+		<note>
+			<text>return_error("Invalid char")</text>
+			<x>165.0</x>
+			<y>148.0</y>
+		</note>
+		<note>
+			<text>return_error("Malformed assign operator")
+backtrack()</text>
+			<x>228.0</x>
+			<y>661.0</y>
+		</note>
+		<note>
+			<text>return_error("Unexpected end of file")</text>
+			<x>45.0</x>
+			<y>374.0</y>
+		</note>
+	</automaton>
+</structure>
