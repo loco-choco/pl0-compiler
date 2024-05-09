@@ -52,5 +52,20 @@ int main(int argc, char* argv[]) {
   
     printf("Hello from pl0-compiler!\n");
     printf("File name: %s\n", pl0_file_name);
+
+    FILE* fd_source_code = fopen(pl0_file_name,"r");
+    if(fd_source_code == NULL) {
+      printf("Error while opening file: %s\n", pl0_file_name);
+      exit(1);
+    }
+
+    char buffer[1024];
+
+    // Reading lines until the end of the file
+    while (fgets(buffer, sizeof(buffer), fd_source_code) != NULL) {
+        printf("%s", buffer);
+    }
+
+    fclose(fd_source_code);
     return 0;
 }
