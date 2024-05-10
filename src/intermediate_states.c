@@ -1,7 +1,7 @@
 #include <states.h>
 #include <stdio.h>
 
-state_t q0_function(char new_symbol, const token_t token) {
+state_t q0_function(char new_symbol, token_t* token) {
     state_t next_state;
     
     if( (('a' <= new_symbol) && (new_symbol <= 'z')) ||
@@ -43,7 +43,7 @@ state_t q0_function(char new_symbol, const token_t token) {
     return next_state;
 }
 
-state_t q1_function(char new_symbol, const token_t token) {
+state_t q1_function(char new_symbol, token_t* token) {
     state_t next_state;
     
     if( (('a' <= new_symbol) && (new_symbol <= 'z')) ||
@@ -58,7 +58,7 @@ state_t q1_function(char new_symbol, const token_t token) {
     return next_state;
 }
 
-state_t q3_function(char new_symbol, const token_t token) {
+state_t q3_function(char new_symbol, token_t* token) {
     state_t next_state;
     
     if(new_symbol == EOF) {
@@ -72,7 +72,7 @@ state_t q3_function(char new_symbol, const token_t token) {
     return next_state;
 }
 
-state_t q4_function(char new_symbol, const token_t token) {
+state_t q4_function(char new_symbol, token_t* token) {
     state_t next_state;
     
     if(('0' <= new_symbol) && (new_symbol <= '9')) {
@@ -84,7 +84,7 @@ state_t q4_function(char new_symbol, const token_t token) {
     return next_state;
 }
 
-state_t q6_function(char new_symbol, const token_t token) {
+state_t q6_function(char new_symbol, token_t* token) {
     state_t next_state;
     
     if(new_symbol == '>') {
@@ -98,7 +98,7 @@ state_t q6_function(char new_symbol, const token_t token) {
     return next_state;
 }
 
-state_t q10_function(char new_symbol, const token_t token) {
+state_t q10_function(char new_symbol, token_t* token) {
     state_t next_state;
     
     if(new_symbol == '=') {
@@ -110,7 +110,7 @@ state_t q10_function(char new_symbol, const token_t token) {
     return next_state;
 }
 
-state_t q13_function(char new_symbol, const token_t token) {
+state_t q13_function(char new_symbol, token_t* token) {
     state_t next_state;
     
     if(new_symbol == '=') {

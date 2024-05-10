@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <lexical_analyzer.h>
+
 #define VERSION 0.0
 #define EXPECTED_ARGUMENTS 1
 
@@ -59,13 +61,79 @@ int main(int argc, char* argv[]) {
       exit(1);
     }
 
-    char buffer[1024];
+    //char buffer[1024];
 
     // Reading lines until the end of the file
-    while (fgets(buffer, sizeof(buffer), fd_source_code) != NULL) {
-        printf("%s", buffer);
-    }
+    //while (fgets(buffer, sizeof(buffer), fd_source_code) != NULL) {
+    //    printf("%s", buffer);
+    //}
+   
+    token_t tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+    
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+    
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
 
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+    
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+    
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+    
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+    
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+    
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+    
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+    
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+    
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+    
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+    
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+    
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+    
+    tk = lexical_analyzer(fd_source_code);
+    printf("Token: %s\n", tk.data);
+    
     fclose(fd_source_code);
     return 0;
 }
