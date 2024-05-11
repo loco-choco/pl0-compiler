@@ -1,5 +1,4 @@
 #include <states.h>
-#include <stdio.h>
 
 state_t q0_function(char new_symbol, token_t* token) {
     state_t next_state;
@@ -26,7 +25,7 @@ state_t q0_function(char new_symbol, token_t* token) {
         next_state = q3;
     } else if(  (new_symbol == '(') ||
                 (new_symbol == ')') ||
-                (new_symbol == '\\') ||
+                (new_symbol == '/') ||
                 (new_symbol == '*') || 
                 (new_symbol == '-') ||
                 (new_symbol == '+') ||

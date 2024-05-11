@@ -1,28 +1,36 @@
 #include <states.h>
-#include <stdio.h>
 #include <string.h>
 
+/* Internally implements the backtrack operation (increase modularity) for the final states */
+void backtrack(token_t* token, char lookahead) {
+    token->data[--token->itr] = '\0';
+    ungetc(lookahead, token->tape_fd);
+}
+
 state_t q2_function(char new_symbol, token_t* token) {
+    backtrack(token, new_symbol);   // First perform the backtrack to allow the correct regonition
+                                    // of the token in the reserved symbol table.
     if(search_reserved_table(token->data, &token->type)){
     } else {
         if(strlen(token->data) <= MAX_TOKEN_LENGTH) {
             token->type = _ident;
         } else {
             token->error = identifier_too_long;
+            token->type = _defective;
         }
     }
-    ungetc(new_symbol, token->tape_fd);
-    token->itr--;
     return q2;
 }
 
 state_t q5_function(char new_symbol, token_t* token) {
+    backtrack(token, new_symbol);
     if(strlen(token->data) <= MAX_TOKEN_LENGTH) {
+        token->type = _number;
     } else {
         token->error = number_too_long;
+        token->type = _defective;
     }
-    ungetc(new_symbol, token->tape_fd);
-    token->itr--;
+
     return q5;
 }
 
@@ -37,9 +45,8 @@ state_t q8_function(char new_symbol, token_t* token) {
 }
 
 state_t q9_function(char new_symbol, token_t* token) {
+    backtrack(token, new_symbol);
     token->type = _less;
-    ungetc(new_symbol, token->tape_fd);
-    token->itr--;
     return q9;
 }
 
@@ -65,17 +72,19 @@ state_t q15_function(char new_symbol, token_t* token) {
 
 state_t q16_function(char new_symbol, token_t* token) {
     token->error = invalid_char;
+    token->type = _defective;
     return q16;
 }
 
 state_t q17_function(char new_symbol, token_t* token) {
+    backtrack(token, new_symbol);
     token->error = malformed_assign_operator;
-    ungetc(new_symbol, token->tape_fd);
-    token->itr--;
+    token->type = _defective;
     return q17;
 }
 
 state_t q18_function(char new_symbol, token_t* token) {
     token->error = unexpected_end_of_file;
+    token->type = _defective;
     return q18;
 }
