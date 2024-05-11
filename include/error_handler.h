@@ -1,6 +1,5 @@
 #ifndef __ERROR_HANDLER_H__
 #define __ERROR_HANDLER_H__
-#include <stdio.h>
 
 typedef enum {
     none = 0, identifier_too_long,
@@ -10,5 +9,7 @@ typedef enum {
     invalid_char
 } error_t;
 
-void display_error(error_t error);
+void get_error_description(error_t error, char* description);
+void get_error_verbose(error_t error, char* message);
+
 #endif
