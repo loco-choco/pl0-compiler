@@ -7,3 +7,5 @@ run:
 clean:
 	rm -rf pl0-compiler
 	rm -rf *.out
+	rm -rf *.log
+	rm -rf *.txt
