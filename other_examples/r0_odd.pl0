@@ -1,4 +1,4 @@
-# regression test for "odd" bug in parser
+{ regression test for "odd" bug in parser }
 BEGIN
   IF ODD -5 THEN ! -5;
   IF ODD -4 THEN ! -4;

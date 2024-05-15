@@ -1,0 +1,4 @@
+CONST x = 1;
+BEGIN
+	x 
+END.
