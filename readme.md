@@ -85,6 +85,6 @@ Final draft:
 
 Finally we handle the error messages
 
-TODO:
+Access link to edit the report:
 
-remove the \lambda in q0 when adding the images to the report
+[Work Report 01](https://www.overleaf.com/4926265154ccxfgqcxdbbj#861c78)
