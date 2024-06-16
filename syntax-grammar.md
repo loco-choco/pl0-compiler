@@ -25,21 +25,21 @@
 
 | Rule | First | Follower |
 | :--- | :---: | :------: |
-| <programa> | {CONST, VAR, PROCEDURE, ident, CALL, BEGIN, IF, WHILE, .} | {Lambda} |
-| <bloco> | {CONST, VAR, PROCEDURE, ident, CALL, BEGIN, IF, WHILE, Lambda} | {., ;} |
-| <declaracao> | {CONST, VAR, PROCEDURE, Lambda} | {ident, CALL, BEGIN, IF, WHILE, ., ;} |
-| <constante> | {CONST, Lambda} | {VAR, PROCEDURE, ident, CALL, BEGIN, IF, WHILE, ., ;} |
-| <mais_const> | {',', Lambda} | {;} |
-| <variavel> | {VAR, Lambda} | {PROCEDURE, ident, CALL, BEGIN, IF, WHILE, ., ;} |
-| <mais_var> | {',', Lambda} | {;} |
-| <procedimento> | {PROCEDURE, Lambda} | {ident, CALL, BEGIN, IF, WHILE, ., ;} |
-| <comando> | {ident, CALL, BEGIN, IF, WHILE, Lambda} | {;, END, .} |
-| <mais_cmd> | {;, Lambda} | {END} |
-| <expressao> | {-, +, ident, numero, (} | {), THEN, DO, =, <>, <, <=, >, >=, ;, END, .} |
-| <operador_unario> | {-, +, Lambda} | {ident, numero, (} |
-| <termo> | {ident, numero, (} | {-, +, ), THEN, DO, =, <>, <, <=, >, >=, ;, END, .} |
-| <mais_termos> | {-, +, Lambda} | {), THEN, DO, =, <>, <, <=, >, >=, ;, END, .} |
-| <fator> | {ident, numero, (} | {\*, /, -, +, ), THEN, DO, =, <>, <, <=, >, >=, ;, END, .} |
-| <mais_fatores> | {\*, /, Lambda} | {-, +, ), THEN, DO, =, <>, <, <=, >, >=, ;, END, .} |
-| <condicao> | {ODD, -, +, ident, numero, (} | {THEN, DO} |
-| <relacional> | {=, <>, <, <=, >, >=} | {-, +, ident, numero, (} | 
+| \<programa> | {CONST, VAR, PROCEDURE, ident, CALL, BEGIN, IF, WHILE, .} | {Lambda} |
+| \<bloco> | {CONST, VAR, PROCEDURE, ident, CALL, BEGIN, IF, WHILE, Lambda} | {., ;} |
+| \<declaracao> | {CONST, VAR, PROCEDURE, Lambda} | {ident, CALL, BEGIN, IF, WHILE, ., ;} |
+| \<constante> | {CONST, Lambda} | {VAR, PROCEDURE, ident, CALL, BEGIN, IF, WHILE, ., ;} |
+| \<mais\_const> | {',', Lambda} | {;} |
+| \<variavel> | {VAR, Lambda} | {PROCEDURE, ident, CALL, BEGIN, IF, WHILE, ., ;} |
+| \<mais\_var> | {',', Lambda} | {;} |
+| \<procedimento> | {PROCEDURE, Lambda} | {ident, CALL, BEGIN, IF, WHILE, ., ;} |
+| \<comando> | {ident, CALL, BEGIN, IF, WHILE, Lambda} | {;, END, .} |
+| \<mais\_cmd> | {;, Lambda} | {END} |
+| \<expressao> | {-, +, ident, numero, (} | {), THEN, DO, =, <>, <, <=, >, >=, ;, END, .} |
+| \<operador\_unario> | {-, +, Lambda} | {ident, numero, (} |
+| \<termo> | {ident, numero, (} | {-, +, ), THEN, DO, =, <>, <, <=, >, >=, ;, END, .} |
+| \<mais\_termos> | {-, +, Lambda} | {), THEN, DO, =, <>, <, <=, >, >=, ;, END, .} |
+| \<fator> | {ident, numero, (} | {\*, /, -, +, ), THEN, DO, =, <>, <, <=, >, >=, ;, END, .} |
+| \<mais\_fatores> | {\*, /, Lambda} | {-, +, ), THEN, DO, =, <>, <, <=, >, >=, ;, END, .} |
+| \<condicao> | {ODD, -, +, ident, numero, (} | {THEN, DO} |
+| \<relacional> | {=, <>, <, <=, >, >=} | {-, +, ident, numero, (} | 
