@@ -1,27 +1,45 @@
 \<programa> ::= \<bloco> .
+
 \<bloco> ::= \<declaracao> \<comando>
+
 \<declaracao> ::= \<constante> \<variavel> \<procedimento>
+
 \<constante> ::= CONST ident = numero \<mais\_const> ; | λ
+
 \<mais\_const> ::= , ident = numero \<mais\_const> | λ
+
 \<variavel> ::= VAR ident \<mais\_var> ; | λ
+
 \<mais\_var> ::= , ident \<mais\_var> | λ
+
 \<procedimento> ::= PROCEDURE ident ; \<bloco> ; \<procedimento> | λ
+
 \<comando> ::= ident := \<expressao>
     | CALL ident
     | BEGIN \<comando> \<mais\_cmd> END
     | IF \<condicao> THEN \<comando>
     | WHILE \<condicao> DO \<comando>
     | λ
+
 \<mais\_cmd> ::= ; \<comando> \<mais\_cmd> | λ
+
 \<expressao> ::= \<operador\_unario> \<termo> \<mais\_termos>
+
 \<operador\_unario> ::= - | + | λ
+
 \<termo> ::= \<fator> \<mais\_fatores>
+
 \<mais\_termos> ::= - \<termo> \<mais\_termos> | + \<termo> \<mais\_termos> | λ
+
 \<fator> ::= ident | numero | ( \<expressão> )
+
 \<mais\_fatores> ::= * \<fator> \<mais\_fatores> | / \<fator> \<mais\_fatores> | λ
+
 \<condicao> ::= ODD \<expressao>
     | \<expressao> \<relacional> \<expressao>
+
 \<relacional> ::= = | <> | < | <= | > | >=
+
 
 | Rule | First | Follower |
 | :--- | :---: | :------: |
