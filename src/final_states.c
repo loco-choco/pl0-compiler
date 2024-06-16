@@ -88,3 +88,9 @@ state_t q18_function(char new_symbol, token_t* token) {
     token->type = _defective;
     return q18;
 }
+
+state_t q19_function(char new_symbol, token_t* token) {
+    token->error = multiline_comment_not_supported;
+    token->type = _defective;
+    return q19;
+}

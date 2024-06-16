@@ -6,6 +6,7 @@ typedef enum {
     number_too_long,
     malformed_assign_operator,
     unexpected_end_of_file,
+    multiline_comment_not_supported,
     invalid_char
 } error_t;
 

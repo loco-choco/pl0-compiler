@@ -17,6 +17,9 @@ void get_error_description(error_t error, char* description) {
         case unexpected_end_of_file:
             strcpy(description, "Found an unexpected end of file!");
             break;
+        case multiline_comment_not_supported:
+            strcpy(description, "Multiline comment not supported!");
+            break;
         case invalid_char:
             strcpy(description, "The character is invalid!");
             break;
@@ -38,6 +41,9 @@ void get_error_verbose(error_t error, char* message) {
             break;
         case unexpected_end_of_file:
             strcpy(message, "You probably forgot to close a comment started at the line indicated above!\nRemember, comments start with ( { ) and end with ( } ),  like: { this is a comment }");
+            break;
+        case multiline_comment_not_supported:
+            strcpy(message, "You probably forgot to close the comment with ( } ) on the line indicated above!\nMultiline comments are not supported!");
             break;
         case invalid_char:
             strcpy(message, "The accepted characters are:\n\t- letters (capitalize or not) from a to z ([a-z] and [A-Z])\n\t- digits from 0 to 9\n\t- math symbols ( +, -, >, =, <, /, * )\n\t- ponctuation symbols like: the comma [ , ] and [ ), (, ., ;, :, }, { ]\n\t- invisible characters ('\\n', '\\r', '\\t', ' ')");

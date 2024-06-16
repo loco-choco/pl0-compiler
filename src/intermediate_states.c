@@ -62,6 +62,8 @@ state_t q3_function(char new_symbol, token_t* token) {
     
     if(new_symbol == EOF) {
         next_state = q18;
+    } else if(new_symbol == '\n' || new_symbol == '\r') {
+        next_state = q19;
     } else if(new_symbol == '}') {
         next_state = q0;
     } else {

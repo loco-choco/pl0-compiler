@@ -22,4 +22,5 @@ state_t q15_function(char new_symbol, token_t* token);
 state_t q16_function(char new_symbol, token_t* token);
 state_t q17_function(char new_symbol, token_t* token);
 state_t q18_function(char new_symbol, token_t* token);
+state_t q19_function(char new_symbol, token_t* token);
 #endif

@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define QTDE_STATES 19
+#define QTDE_STATES 20
 #define MAX_TOKEN_LENGTH 100
 
 /* The states of the lexical analyzer FSA (Finate State Automaton)*/
@@ -15,7 +15,8 @@ typedef enum {
     q3,  q4,  q5,  q6,
     q7,  q8,  q9,  q10,
     q11, q12, q13, q14,
-    q15, q16, q17, q18
+    q15, q16, q17, q18,
+    q19
 } state_t;
 
 typedef struct Token token_t;
