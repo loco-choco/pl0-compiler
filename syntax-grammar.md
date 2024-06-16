@@ -1,27 +1,27 @@
-<programa> ::= <bloco> .
-<bloco> ::= <declaracao> <comando>
-<declaracao> ::= <constante> <variavel> <procedimento>
-<constante> ::= CONST ident = numero <mais_const> ; | λ
-<mais_const> ::= , ident = numero <mais_const> | λ
-<variavel> ::= VAR ident <mais_var> ; | λ
-<mais_var> ::= , ident <mais_var> | λ
-<procedimento> ::= PROCEDURE ident ; <bloco> ; <procedimento> | λ
-<comando> ::= ident := <expressao>
+\<programa> ::= \<bloco> .
+\<bloco> ::= \<declaracao> \<comando>
+\<declaracao> ::= \<constante> \<variavel> \<procedimento>
+\<constante> ::= CONST ident = numero \<mais\_const> ; | λ
+\<mais\_const> ::= , ident = numero \<mais\_const> | λ
+\<variavel> ::= VAR ident \<mais\_var> ; | λ
+\<mais\_var> ::= , ident \<mais\_var> | λ
+\<procedimento> ::= PROCEDURE ident ; \<bloco> ; \<procedimento> | λ
+\<comando> ::= ident := \<expressao>
     | CALL ident
-    | BEGIN <comando> <mais_cmd> END
-    | IF <condicao> THEN <comando>
-    | WHILE <condicao> DO <comando>
+    | BEGIN \<comando> \<mais\_cmd> END
+    | IF \<condicao> THEN \<comando>
+    | WHILE \<condicao> DO \<comando>
     | λ
-<mais_cmd> ::= ; <comando> <mais_cmd> | λ
-<expressao> ::= <operador_unario> <termo> <mais_termos>
-<operador_unario> ::= - | + | λ
-<termo> ::= <fator> <mais_fatores>
-<mais_termos> ::= - <termo> <mais_termos> | + <termo> <mais_termos> | λ
-<fator> ::= ident | numero | ( <expressão> )
-<mais_fatores> ::= * <fator> <mais_fatores> | / <fator> <mais_fatores> | λ
-<condicao> ::= ODD <expressao>
-    | <expressao> <relacional> <expressao>
-<relacional> ::= = | <> | < | <= | > | >=
+\<mais\_cmd> ::= ; \<comando> \<mais\_cmd> | λ
+\<expressao> ::= \<operador\_unario> \<termo> \<mais\_termos>
+\<operador\_unario> ::= - | + | λ
+\<termo> ::= \<fator> \<mais\_fatores>
+\<mais\_termos> ::= - \<termo> \<mais\_termos> | + \<termo> \<mais\_termos> | λ
+\<fator> ::= ident | numero | ( \<expressão> )
+\<mais\_fatores> ::= * \<fator> \<mais\_fatores> | / \<fator> \<mais\_fatores> | λ
+\<condicao> ::= ODD \<expressao>
+    | \<expressao> \<relacional> \<expressao>
+\<relacional> ::= = | <> | < | <= | > | >=
 
 | Rule | First | Follower |
 | :--- | :---: | :------: |
