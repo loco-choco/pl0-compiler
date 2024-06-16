@@ -4,8 +4,8 @@
 
 /* Check if a state is a terminal state */
 int is_terminal(state_t curr_state) {
-    state_t terminal_states[13] = {q5, q2, q7, q8, q9, q11, q12, q14, q17, q15, q18, q16, q19};
-    int qtde_terminal_states = 13;
+    state_t terminal_states[14] = {q5, q2, q7, q8, q9, q11, q12, q14, q17, q15, q18, q16, q19, q20};
+    int qtde_terminal_states = 14;
     int result = 0;
     
     for(int i = 0; i < qtde_terminal_states; i++) {
@@ -41,7 +41,7 @@ token_t lexical_analyzer(FILE *tape) {
         &q9_function,   &q10_function,  &q11_function,
         &q12_function,  &q13_function,  &q14_function,
         &q15_function,  &q16_function,  &q17_function,
-        &q18_function, &q19_function
+        &q18_function,  &q19_function,  &q20_function 
     };
     
     /* Initializes the token iterator with 0 */

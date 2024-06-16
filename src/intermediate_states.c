@@ -2,8 +2,9 @@
 
 state_t q0_function(char new_symbol, token_t* token) {
     state_t next_state;
-    
-    if( (('a' <= new_symbol) && (new_symbol <= 'z')) ||
+    if ( new_symbol == EOF ) {
+        next_state = q20;
+    } else if( (('a' <= new_symbol) && (new_symbol <= 'z')) ||
         (('A' <= new_symbol) && (new_symbol <= 'Z')) 
     ) {
         next_state = q1;
@@ -38,7 +39,6 @@ state_t q0_function(char new_symbol, token_t* token) {
     } else {
         next_state = q16;
     }
-    
     return next_state;
 }
 

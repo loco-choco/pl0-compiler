@@ -72,8 +72,8 @@
 			<final/>
 		</state>
 		<state id="15" name="q15">
-			<x>345.0</x>
-			<y>565.0</y>
+			<x>348.0</x>
+			<y>572.0</y>
 			<final/>
 		</state>
 		<state id="16" name="q16">
@@ -94,6 +94,11 @@
 		<state id="19" name="q19">
 			<x>81.0</x>
 			<y>519.0</y>
+			<final/>
+		</state>
+		<state id="20" name="q20">
+			<x>169.0</x>
+			<y>270.0</y>
 			<final/>
 		</state>
 		<!--The list of transitions.-->
@@ -139,11 +144,6 @@
 			<read>other</read>
 		</transition>
 		<transition>
-			<from>3</from>
-			<to>19</to>
-			<read>\r</read>
-		</transition>
-		<transition>
 			<from>1</from>
 			<to>1</to>
 			<read>A-Z</read>
@@ -152,11 +152,6 @@
 			<from>1</from>
 			<to>1</to>
 			<read>a-z</read>
-		</transition>
-		<transition>
-			<from>3</from>
-			<to>19</to>
-			<read>\n</read>
 		</transition>
 		<transition>
 			<from>3</from>
@@ -204,6 +199,11 @@
 			<read>A-Z</read>
 		</transition>
 		<transition>
+			<from>0</from>
+			<to>20</to>
+			<read>EOF</read>
+		</transition>
+		<transition>
 			<from>1</from>
 			<to>1</to>
 			<read>0-9</read>
@@ -234,6 +234,11 @@
 			<read>other</read>
 		</transition>
 		<transition>
+			<from>3</from>
+			<to>19</to>
+			<read>\n</read>
+		</transition>
+		<transition>
 			<from>0</from>
 			<to>15</to>
 			<read>. , ; = + - * / ( )</read>
@@ -242,6 +247,11 @@
 			<from>6</from>
 			<to>8</to>
 			<read>=</read>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>19</to>
+			<read>\r</read>
 		</transition>
 		<transition>
 			<from>0</from>
@@ -267,8 +277,8 @@ else:
           else:
                        return_error("Indentifier too long")
 backtrack()</text>
-			<x>878.0</x>
-			<y>156.0</y>
+			<x>736.0</x>
+			<y>138.0</y>
 		</note>
 		<note>
 			<text>if strlen(string) &lt;= MAX:
@@ -276,66 +286,71 @@ backtrack()</text>
 else:
             return_error("Number too long")
 backtrack()</text>
-			<x>777.0</x>
-			<y>41.0</y>
+			<x>622.0</x>
+			<y>30.0</y>
 		</note>
 		<note>
 			<text>return(&lt;&gt;, diff)</text>
-			<x>919.0</x>
-			<y>355.0</y>
+			<x>747.0</x>
+			<y>303.0</y>
 		</note>
 		<note>
 			<text>return(&lt;=, less_eq)</text>
-			<x>890.0</x>
-			<y>427.0</y>
+			<x>736.0</x>
+			<y>358.0</y>
 		</note>
 		<note>
 			<text>return(&lt;, less)
 backtrack()</text>
-			<x>892.0</x>
-			<y>512.0</y>
+			<x>735.0</x>
+			<y>412.0</y>
 		</note>
 		<note>
 			<text>return(&gt;=, bigg_eq)</text>
-			<x>842.0</x>
-			<y>610.0</y>
+			<x>715.0</x>
+			<y>493.0</y>
 		</note>
 		<note>
 			<text>return(&gt;, bigger)
 backtrack()</text>
-			<x>773.0</x>
-			<y>676.0</y>
+			<x>665.0</x>
+			<y>544.0</y>
 		</note>
 		<note>
 			<text>return(:= , assign)</text>
-			<x>643.0</x>
-			<y>729.0</y>
+			<x>587.0</x>
+			<y>604.0</y>
 		</note>
 		<note>
 			<text>return(symbol, search_reservedTable(symbol))</text>
-			<x>261.0</x>
-			<y>679.0</y>
+			<x>113.0</x>
+			<y>601.0</y>
 		</note>
 		<note>
 			<text>return_error("Invalid char")</text>
-			<x>241.0</x>
-			<y>170.0</y>
+			<x>164.0</x>
+			<y>149.0</y>
 		</note>
 		<note>
 			<text>return_error("Malformed assign operator")
 backtrack()</text>
-			<x>379.0</x>
-			<y>751.0</y>
+			<x>330.0</x>
+			<y>652.0</y>
 		</note>
 		<note>
 			<text>return_error("Unexpected end of file")</text>
-			<x>103.0</x>
-			<y>430.0</y>
+			<x>27.0</x>
+			<y>363.0</y>
 		</note>
 		<note>
 			<text>return_error("Multiline comment not supported")</text>
-			<x>22.0</x>
-			<y>636.0</y>
+			<x>7.0</x>
+			<y>550.0</y>
+		</note>
+		<note>
+			<text>return(EOF, end_of_file)</text>
+			<x>51.0</x>
+			<y>225.0</y>
 		</note>
 	</automaton>
 </structure>

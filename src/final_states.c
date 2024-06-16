@@ -94,3 +94,9 @@ state_t q19_function(char new_symbol, token_t* token) {
     token->type = _defective;
     return q19;
 }
+
+state_t q20_function(char new_symbol, token_t* token) {
+    token->type = _end_of_file;
+    strcpy(token->data, "EOF");
+    return q20;
+}

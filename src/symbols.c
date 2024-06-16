@@ -71,7 +71,8 @@ char symbol_name_table[SYMBOL_LIST_LENGTH][22] = {
     "Identifier",
     "Number",
     "Unclassified",
-    "Defective"
+    "Defective",
+    "EOF"
 };
 
 int search_reserved_table(char* token, symbol_t* type) {

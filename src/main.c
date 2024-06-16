@@ -85,23 +85,14 @@ int main(int argc, char* argv[]) {
     tk_node_t* token_chain = token_chain_head; 
     
     /* Defines the auxiliary variables to the sucessive calls of lexical analyzer */ 
-    char lookahead; // A "lookahead"ahead character to detect the END OF THE FILE (EOF)
     tk_node_t* token_previous = NULL; // A previous token to detect the "dot" that indicates
                                       // The end of the program
     
-    /* Successively calls the lexical analyzer until the EOF, or the end-of-program token */ 
-    while ( (lookahead = getc(fd_source_code)) != EOF && 
-            (   (token_previous == NULL) ||         // Uses the power of the short-circuit in C
-                (token_previous->type != _end_prog) // to avoid misreading a NULL pointer.
-            )
-    ) {
-        ungetc(lookahead, fd_source_code); // A simple "backtrack()"
-        
-
+    /* Successively calls the lexical analyzer until the EOF, or the end-of-file token */ 
+    while ( token_previous == NULL || token_previous->type != _end_of_file ) {
         /* HERE (FINALLY) THE CALL OF THE LONG AWAITED LEXICAL ANALYZER!! */
         token_t tk = lexical_analyzer(fd_source_code);
         /* more space to emphasize the call */
-    
 
         /* Converts the log provided by the lexical 
          * analyzer into a token-chain element */
@@ -109,6 +100,7 @@ int main(int argc, char* argv[]) {
         token_chain->error = tk.error;
         token_chain->type = tk.type;
         token_chain->line_number = tk.line_number;
+
         
         /* Allocates space to the next token and initialize it */
         token_chain->next = malloc(sizeof(tk_node_t));  
@@ -129,7 +121,6 @@ int main(int argc, char* argv[]) {
     }
 
     token_chain = token_chain_head; // Points again to the head of the chain
-    
     /* Reads the token chain and prints it to the log file */
     while(token_chain != NULL) {
         char error_type[30];
