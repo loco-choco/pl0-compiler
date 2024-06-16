@@ -1,3 +1,5 @@
+# LL(1)
+
 \<programa> ::= \<bloco> .
 
 \<bloco> ::= \<declaracao> \<comando>
@@ -40,6 +42,8 @@
 
 \<relacional> ::= = | <> | < | <= | > | >=
 
+
+## First and Follower
 
 | Rule | First | Follower |
 | :--- | :---: | :------: |
