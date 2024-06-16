@@ -24,7 +24,7 @@
 <relacional> ::= = | <> | < | <= | > | >=
 
 | Rule | First | Follower |
-|  :--- | :-----: | --------: |
+| :--- | :---: | :------: |
 | <programa> | {CONST, VAR, PROCEDURE, ident, CALL, BEGIN, IF, WHILE, .} | {Lambda} |
 | <bloco> | {CONST, VAR, PROCEDURE, ident, CALL, BEGIN, IF, WHILE, Lambda} | {., ;} |
 | <declaracao> | {CONST, VAR, PROCEDURE, Lambda} | {ident, CALL, BEGIN, IF, WHILE, ., ;} |
