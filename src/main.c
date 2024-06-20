@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <lexical_analyzer.h>
+#include <syntactic_analyzer.h>
 
 #define VERSION 0.0
 #define EXPECTED_ARGUMENTS 2
@@ -75,83 +75,9 @@ int main(int argc, char* argv[]) {
       exit(1);
     }
     /* END of the process */
-   
-    /* FROM HERE WE WILL ACTUALLY STARTS THE LEXICAL ANALYSIS */
     
-    /* Creates a linked-list (a chain) for the Tokens that 
-     * are going to be parsed and classified */
-    tk_node_t* token_chain_head = malloc(sizeof(tk_node_t));
-    token_chain_head->next = NULL;
-    tk_node_t* token_chain = token_chain_head; 
-    
-    /* Defines the auxiliary variables to the sucessive calls of lexical analyzer */ 
-    tk_node_t* token_previous = NULL; // A previous token to detect the "dot" that indicates
-                                      // The end of the program
-    
-    /* Successively calls the lexical analyzer until the EOF, or the end-of-file token */ 
-    while ( token_previous == NULL || token_previous->type != _end_of_file ) {
-        /* HERE (FINALLY) THE CALL OF THE LONG AWAITED LEXICAL ANALYZER!! */
-        token_t tk = lexical_analyzer(fd_source_code);
-        /* more space to emphasize the call */
-
-        /* Converts the log provided by the lexical 
-         * analyzer into a token-chain element */
-        strcpy(token_chain->data, tk.data);
-        token_chain->error = tk.error;
-        token_chain->type = tk.type;
-        token_chain->line_number = tk.line_number;
-
+    syntactic_analyser(fd_source_code, fd_log);
         
-        /* Allocates space to the next token and initialize it */
-        token_chain->next = malloc(sizeof(tk_node_t));  
-        token_chain->next->next = NULL;
-        token_chain->next->data[0] = '\0';
-        
-        /* Updates the previous token */ 
-        token_previous = token_chain;
-        
-        /* Iterates to the next token */
-        token_chain = token_chain->next;
-    }
-    /* At the end frees the last unused chain element
-     * allocated at the end of the for-loop */
-    if(token_previous != NULL) { // If the code ever entered the loop
-        free(token_chain);
-        token_previous->next = NULL;
-    }
-
-    token_chain = token_chain_head; // Points again to the head of the chain
-    /* Reads the token chain and prints it to the log file */
-    while(token_chain != NULL) {
-        char error_type[30];
-        char symbol_type[30];
-        char error_detailed_description[1024];
- 
-        get_symbol_description(token_chain->type, symbol_type); // Returns the symbol type name
-        
-        /* Prints the respective token and its class
-         * (which was called 'type' within the context of this code). */
-        fprintf(fd_log, "Token:( %s ),\tClass:( %s ),\t", token_chain->data, symbol_type);
-        
-        /* If the token has errors (defective), display the error found.*/
-        if(token_chain->error != none) {
-           get_error_description(token_chain->error, error_type); // Returns the error type basic description
-           /* Prints the error basic message (basically the error type) */ 
-           fprintf(fd_log, "Error: ( %s )", error_type); 
-            if(set_verbose_errors) {
-                fprintf(fd_log, " found at line %d", token_chain->line_number);
-                get_error_verbose(token_chain->error, error_detailed_description); // Returns the error detailed message
-                fprintf(fd_log, "\nDetailed description: %s", error_detailed_description);
-            } 
-        } 
-        fprintf(fd_log, "\n");
-         
-        token_chain = token_chain->next; // Iterates to the next token
-    }
-    
-    /* Frees memory allocated to the token chain */
-    free_token_chain(token_chain_head); 
-    
     /* Closes the open file descriptors */
     fclose(fd_source_code);
     fclose(fd_log);

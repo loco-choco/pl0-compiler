@@ -15,8 +15,8 @@ void syntactic_analyser(FILE *file, FILE *error_output){
 
 void syntactic_panic_handler(FILE *file, token_t* current_symbol, char* error, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
   fprintf(error_output, "Syntactic Error: '%s' at line %d\n", error, current_symbol->line_number);
-
-  if(current_symbol->type == _unclassified){ //Lexical Error!
+  
+  if(current_symbol->error != none){ //Lexical Error!
     char error_type[30];
     get_error_description(current_symbol->error, error_type);
     fprintf(error_output, "\tLexical Error: '%s' at line %d\n", error_type, current_symbol->line_number);
@@ -38,11 +38,11 @@ void syntactic_panic_handler(FILE *file, token_t* current_symbol, char* error, s
 
 //Procedures of the syntactic grammar
 void program(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
+  printf("PROGRAM\n");
   //Sync symbols for block
   symbol_t* syncs_block = malloc(sizeof(symbol_t) * (sync_symbols_num + 1));
   memcpy(syncs_block, sync_symbols, sync_symbols_num);
   syncs_block[sync_symbols_num] = _end_prog;
-   
   block(file, current_symbol, syncs_block, sync_symbols_num + 1, error_output);
   if(current_symbol->type == _end_prog){
     *current_symbol = lexical_analyzer(file);
@@ -53,17 +53,20 @@ void program(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sy
   return;
 }
 void block(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
+  printf("BLOCK\n");
   //TODO ADD SYNC SYMBS
   declaration(file, current_symbol, sync_symbols, sync_symbols_num, error_output);
   command(file, current_symbol, sync_symbols, sync_symbols_num, error_output);
 }
 void declaration(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
+  printf("DECLARATION\n");
   //TODO ADD SYNC SYMBS
   constant(file, current_symbol, sync_symbols, sync_symbols_num, error_output);
   variable(file, current_symbol, sync_symbols, sync_symbols_num, error_output);
   procedure(file, current_symbol, sync_symbols, sync_symbols_num, error_output);
 }
 void constant(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
+  printf("CONSTANT\n");
   //TODO ADD SYNC SYMBS
   if(current_symbol->type != _const){
     return;
@@ -107,6 +110,7 @@ void constant(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int s
   }
 }
 void variable(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
+  printf("VARIABLE\n");
   //TODO ADD SYNC SYMBS
   if(current_symbol->type != _var){
     return;
@@ -137,6 +141,7 @@ void variable(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int s
   }
 }
 void procedure(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
+  printf("PROCEDURE\n");
   //TODO ADD SYNC SYMBS
   if(current_symbol->type != _procedure){
     return;
@@ -169,6 +174,7 @@ void procedure(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int 
   procedure(file, current_symbol, sync_symbols, sync_symbols_num, error_output);
 }
 void command(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
+  printf("COMMAND\n");
   //TODO ADD SYNC SYMBS
   if(current_symbol->type == _ident){
     *current_symbol = lexical_analyzer(file);
@@ -186,15 +192,12 @@ void command(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sy
     } else {
       syntactic_panic_handler(file, current_symbol, "No IDENT for CALL", sync_symbols, sync_symbols_num, error_output);
     }
+
   } else if(current_symbol->type == _begin) {
     *current_symbol = lexical_analyzer(file);
     int more_commands = 0;
     do {
-      if(current_symbol->type == _ident){
-        *current_symbol = lexical_analyzer(file);
-      } else {
-        syntactic_panic_handler(file, current_symbol, "No IDENT for CALL", sync_symbols, sync_symbols_num, error_output);
-      }
+      command(file, current_symbol, sync_symbols, sync_symbols_num, error_output);
       if(current_symbol->type == _end_exp){
         more_commands = 1;
         *current_symbol = lexical_analyzer(file);
@@ -202,6 +205,13 @@ void command(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sy
         more_commands = 0;
       }
     } while(more_commands);
+    if(current_symbol->type == _end){
+      *current_symbol = lexical_analyzer(file);
+    } else {
+      syntactic_panic_handler(file, current_symbol, "BEGIN not closing with END", sync_symbols, sync_symbols_num, error_output);
+      return;
+    }
+
   } else if(current_symbol->type == _if) {
     *current_symbol = lexical_analyzer(file);
     condition(file, current_symbol, sync_symbols, sync_symbols_num, error_output);
@@ -211,7 +221,8 @@ void command(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sy
       syntactic_panic_handler(file, current_symbol, "No THEN on IF", sync_symbols, sync_symbols_num, error_output);
       return;
     }
-    condition(file, current_symbol, sync_symbols, sync_symbols_num, error_output);
+    command(file, current_symbol, sync_symbols, sync_symbols_num, error_output);
+
   } else if(current_symbol->type == _while) {
     *current_symbol = lexical_analyzer(file);
     condition(file, current_symbol, sync_symbols, sync_symbols_num, error_output);
@@ -221,10 +232,11 @@ void command(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sy
       syntactic_panic_handler(file, current_symbol, "No DO on WHILE", sync_symbols, sync_symbols_num, error_output);
       return;
     }
-    condition(file, current_symbol, sync_symbols, sync_symbols_num, error_output);
+    command(file, current_symbol, sync_symbols, sync_symbols_num, error_output);
   }
 }
 void expression(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
+  printf("EXPRESSION\n");
   //TODO ADD SYNC SYMBS
   unary_operator(file, current_symbol, sync_symbols, sync_symbols_num, error_output);
   int more_terms = 0;
@@ -240,12 +252,14 @@ void expression(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int
   } while(more_terms);
 }
 void unary_operator(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
+  printf("UNARY OP\n");
   //TODO ADD SYNC SYMBS
     if(current_symbol->type == _plus || current_symbol->type == _minus){
       *current_symbol = lexical_analyzer(file);
     } 
 }
 void term(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
+  printf("TERM\n");
   //TODO ADD SYNC SYMBS
   int more_factors = 0;
   do{
@@ -260,10 +274,11 @@ void term(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_
   } while(more_factors);
 }
 void factor(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
+  printf("FACTOR\n");
   //TODO ADD SYNC SYMBS
   if(current_symbol->type == _ident){
     *current_symbol = lexical_analyzer(file);
-  } else if(current_symbol->type == _ident){
+  } else if(current_symbol->type == _number){
     *current_symbol = lexical_analyzer(file);
   } else if(current_symbol->type == _open_exp){
     *current_symbol = lexical_analyzer(file);
@@ -276,6 +291,7 @@ void factor(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int syn
   } 
 }
 void condition(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
+  printf("CONDITION\n");
   //TODO ADD SYNC SYMBS
   if(current_symbol->type == _odd){
     *current_symbol = lexical_analyzer(file);
@@ -287,6 +303,7 @@ void condition(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int 
   }
 }
 void relational(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
+  printf("RELATIONAL\n");
   //TODO ADD SYNC SYMBS
   if(current_symbol->type == _equal   || current_symbol->type == _diff    ||
       current_symbol->type == _bigger  || current_symbol->type == _bigg_eq ||

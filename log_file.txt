@@ -1,7 +1,0 @@
-Token:( BEGIN ),	Class:( BEGIN ),	
-Token:( 1 ),	Class:( Number ),	
-Token:( + ),	Class:( Plus ),	
-Token:( 2 ),	Class:( Number ),	
-Token:( END ),	Class:( END ),	
-Token:( . ),	Class:( Dot ),	
-Token:( EOF ),	Class:( EOF ),	

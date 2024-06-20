@@ -79,6 +79,7 @@ token_t lexical_analyzer(FILE *tape) {
                                 )
       ) number_of_the_line--;
             
+    printf("Current Token %s\n", token.data);
     return token;
 }
 
