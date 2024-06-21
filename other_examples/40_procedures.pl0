@@ -1,17 +1,17 @@
 { no parametrs in this language, so we'll use a global for now }
-var i;
+VAR i;
 
-procedure square;
- var n;
-begin
+PROCEDURE square;
+ VAR n;
+BEGIN
   n := i;
-  ! ( n * n )
-end;
+  n := ( n * n )
+END;
 
-begin
+BEGIN
   i := 0 ;
-  while i < 10 do begin
+  WHILE i < 10 DO BEGIN
     i := i + 1 ;
-    call square
-  end
-end.
+    CALL square
+  END
+END.
