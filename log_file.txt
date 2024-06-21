@@ -1,3 +1,0 @@
-Syntactic Error: 'BEGIN not closing with END' at line 5
-	Lexical Error: 'The character is invalid!' at line 5
-Syntactic Error: 'No End Program' at line 5
