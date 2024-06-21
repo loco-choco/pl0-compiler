@@ -58,6 +58,7 @@ void program(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sy
     syntactic_panic_handler(file, current_symbol, "No End Program", sync_symbols, sync_symbols_num, error_output);
   }
   free(syncs_block);
+  printf("END PROGRAM\n");
   return;
 }
 void block(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
@@ -86,6 +87,7 @@ void block(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync
 
   free(syncs_declaration);
   free(syncs_command);
+  printf("END BLOCK\n");
 }
 void declaration(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
   printf("DECLARATION\n");
@@ -127,6 +129,7 @@ void declaration(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, in
   free(syncs_constant);
   free(syncs_variable);
   free(syncs_procedure);
+  printf("END DECLARATION\n");
 }
 void constant(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
   printf("CONSTANT\n");
@@ -141,6 +144,7 @@ void constant(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int s
       *current_symbol = lexical_analyzer(file);
     } else {
       syntactic_panic_handler(file, current_symbol, "No IDENT in constant definition", sync_symbols, sync_symbols_num, error_output);
+      printf("END CONSTANT\n");
       return;
     }
 
@@ -148,6 +152,7 @@ void constant(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int s
       *current_symbol = lexical_analyzer(file);
     } else {
       syntactic_panic_handler(file, current_symbol, "No '=' in constant definition", sync_symbols, sync_symbols_num, error_output);
+      printf("END CONSTANT\n");
       return;
     }
 
@@ -155,6 +160,7 @@ void constant(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int s
       *current_symbol = lexical_analyzer(file);
     } else {
       syntactic_panic_handler(file, current_symbol, "No NUMBER in constant definition", sync_symbols, sync_symbols_num, error_output);
+      printf("END CONSTANT\n");
       return;
     }
     if(current_symbol->type == _separator){
@@ -170,10 +176,12 @@ void constant(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int s
   } else {
     syntactic_panic_handler(file, current_symbol, "Constant definition wasnt closed with ';'", sync_symbols, sync_symbols_num, error_output);
   }
+  printf("END CONSTANT\n");
 }
 void variable(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
   printf("VARIABLE\n");
   if(current_symbol->type != _var){
+    printf("END VARIABLE\n");
     return;
   }
   *current_symbol = lexical_analyzer(file);
@@ -184,6 +192,7 @@ void variable(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int s
       *current_symbol = lexical_analyzer(file);
     } else {
       syntactic_panic_handler(file, current_symbol, "No IDENT in variable definition", sync_symbols, sync_symbols_num, error_output);
+      printf("END VARIABLE\n");
       return;
     }
     
@@ -200,6 +209,7 @@ void variable(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int s
   } else {
     syntactic_panic_handler(file, current_symbol, "Variable definition wasnt closed with ';'", sync_symbols, sync_symbols_num, error_output);
   }
+  printf("END VARIABLE\n");
 }
 void procedure(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
   printf("PROCEDURE\n");
@@ -220,6 +230,7 @@ void procedure(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int 
   if(current_symbol->type != _procedure){
     free(syncs_block);
     free(syncs_procedure);
+    printf("END PROCEDURE\n");
     return;
   }
   *current_symbol = lexical_analyzer(file);
@@ -230,6 +241,7 @@ void procedure(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int 
     syntactic_panic_handler(file, current_symbol, "No IDENT in procedure definition", sync_symbols, sync_symbols_num, error_output);
     free(syncs_block);
     free(syncs_procedure);
+    printf("END PROCEDURE\n");
     return;
   }
 
@@ -239,6 +251,7 @@ void procedure(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int 
     syntactic_panic_handler(file, current_symbol, "No ';' closing procedure definition", sync_symbols, sync_symbols_num, error_output);
     free(syncs_block);
     free(syncs_procedure);
+    printf("END PROCEDURE\n");
     return;
   }
   
@@ -250,12 +263,14 @@ void procedure(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int 
     syntactic_panic_handler(file, current_symbol, "No ';' closing procedure block", sync_symbols, sync_symbols_num, error_output);
     free(syncs_block);
     free(syncs_procedure);
+    printf("END PROCEDURE\n");
     return;
   }
 
   procedure(file, current_symbol, syncs_procedure, sync_symbols_num + 7, error_output);
   free(syncs_block);
   free(syncs_procedure);
+  printf("END PROCEDURE\n");
 }
 void command(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
   printf("COMMAND\n");
@@ -300,6 +315,7 @@ void command(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sy
       free(syncs_condition);
       free(syncs_expression);
       free(syncs_command);
+      printf("END COMMAND\n");
       return;
     }
     expression(file, current_symbol, syncs_expression, sync_symbols_num + 12, error_output);
@@ -330,6 +346,7 @@ void command(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sy
       free(syncs_condition);
       free(syncs_expression);
       free(syncs_command);
+      printf("END COMMAND\n");
       return;
     }
 
@@ -343,6 +360,7 @@ void command(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sy
       free(syncs_condition);
       free(syncs_expression);
       free(syncs_command);
+      printf("END COMMAND\n");
       return;
     }
     command(file, current_symbol, syncs_command, sync_symbols_num + 7, error_output);
@@ -357,13 +375,15 @@ void command(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sy
       free(syncs_condition);
       free(syncs_expression);
       free(syncs_command);
+      printf("END COMMAND\n");
       return;
     }
     command(file, current_symbol, syncs_command, sync_symbols_num + 7, error_output);
   }
   free(syncs_condition);
   free(syncs_expression);
-      free(syncs_command);
+  free(syncs_command);
+  printf("END COMMAND\n");
 }
 void expression(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
   printf("EXPRESSION\n");
@@ -403,12 +423,14 @@ void expression(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int
   } while(more_terms);
   free(syncs_unary_operator);
   free(syncs_term);
+  printf("END EXPRESSION\n");
 }
 void unary_operator(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
   printf("UNARY OP\n");
     if(current_symbol->type == _plus || current_symbol->type == _minus){
       *current_symbol = lexical_analyzer(file);
     } 
+  printf("END UNARY OP\n");
 }
 void term(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
   printf("TERM\n");
@@ -442,6 +464,7 @@ void term(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_
     }
   } while(more_factors);
   free(syncs_factor);
+  printf("END TERM\n");
 }
 void factor(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
   printf("FACTOR\n");
@@ -476,6 +499,7 @@ void factor(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int syn
       syntactic_panic_handler(file, current_symbol, "Invalid Token in Expression", sync_symbols, sync_symbols_num, error_output);
   }
   free(syncs_expression);
+  printf("END FACTOR\n");
 }
 void condition(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
   printf("CONDITION\n");
@@ -511,6 +535,7 @@ void condition(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int 
   }
   free(syncs_expression);
   free(syncs_relational);
+  printf("END CONDITION\n");
 }
 void relational(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sync_symbols_num, FILE *error_output){
   printf("RELATIONAL\n");
@@ -522,4 +547,5 @@ void relational(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int
   else {
     syntactic_panic_handler(file, current_symbol, "Not a relational operator", sync_symbols, sync_symbols_num, error_output);
   }
+  printf("END RELATIONAL\n");
 }
