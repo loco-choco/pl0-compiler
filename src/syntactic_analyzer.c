@@ -287,6 +287,10 @@ void command(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int sy
   syncs_command[sync_symbols_num + 5] = _if;
   syncs_command[sync_symbols_num + 6] = _while;
 
+  if(current_symbol->error != none) { //Preemptivily check for invalid token, and search for valid start before going down the call tree
+      syntactic_panic_handler(file, current_symbol, "Invalid Token in Command Start", syncs_command, sync_symbols_num + 7, error_output);
+  }
+
   if(current_symbol->type == _ident){
     *current_symbol = lexical_analyzer(file);
     if(current_symbol->type == _assign){
@@ -468,6 +472,8 @@ void factor(FILE* file, token_t* current_symbol, symbol_t* sync_symbols, int syn
     } else {
       syntactic_panic_handler(file, current_symbol, "Expression not closed with ')'", sync_symbols, sync_symbols_num, error_output);
     }
+  } else if(current_symbol->error != none) { //Added as a way to remove possible invalid token, and restore to a valid symbol
+      syntactic_panic_handler(file, current_symbol, "Invalid Token in Expression", sync_symbols, sync_symbols_num, error_output);
   }
   free(syncs_expression);
 }
